@@ -3,7 +3,7 @@
 </script>
 
 <div class="absolute top-6 left-6 flex flex-col space-y-2 text-slate-400 text-sm">
-	<h1 class="text-lg font-bold text-slate-200">Binary Search Tree Playground</h1>
+	<h1 class="md:text-lg text-base font-bold text-slate-200">Binary Search Tree Playground</h1>
 	{#if showInstructions}
 		<p>
 			Click and drag to navigate the canvas
