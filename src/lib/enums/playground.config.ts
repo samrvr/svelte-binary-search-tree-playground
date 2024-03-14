@@ -8,5 +8,6 @@ export enum PlaygroundConfig {
 	NODE_BG_COLOR = '#64748b',
 	HOVER_NODE_BG_COLOR = '#475569',
 	NODE_TEXT_COLOR = '#e2e8f0',
-	GRID_DOT_COLOR = '#33415580'
+	GRID_DOT_COLOR = '#33415580',
+	ROOT_MARKER_COLOR = '#64748b'
 }
