@@ -20,6 +20,14 @@ export class BST {
 		return insert(this.root, newNode);
 	}
 
+	remove(value: number): BSTNode | null {
+		if (!this.root) {
+			return null;
+		}
+		this.root = remove(this.root, value);
+		return this.root;
+	}
+
 	search(value: number): BSTNode | null {
 		return this.root ? search(this.root, value) : null;
 	}
@@ -90,18 +98,33 @@ function search(node: BSTNode, searchValue: number): BSTNode | null {
 	return null;
 }
 
+function findMin(node: BSTNode): BSTNode {
+	while (node.left) {
+		node = node.left;
+	}
+	return node;
+}
+
 function remove(node: BSTNode, removeValue: number): BSTNode | null {
-	if (removeValue === node.value) {
+	if (node.value === removeValue) {
+		if (!node.left && !node.right) {
+			return null;
+		}
+		if (!node.left) {
+			return node.right;
+		}
+		if (!node.right) {
+			return node.left;
+		}
+		const temp = findMin(node.right);
+		node.value = temp.value;
+		node.right = remove(node.right, temp.value);
 		return node;
 	}
 	if (removeValue > node.value) {
-		if (node.right) {
-			return search(node.right, removeValue);
-		}
-		return null;
+		node.right = node.right ? remove(node.right, removeValue) : null;
+		return node;
 	}
-	if (node.left) {
-		return search(node.left, removeValue);
-	}
-	return null;
+	node.left = node.left ? remove(node.left, removeValue) : null;
+	return node;
 }
