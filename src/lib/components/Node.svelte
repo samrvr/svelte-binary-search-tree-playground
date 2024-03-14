@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { PlaygroundConfig } from '$lib/enums/playground.config';
+	import { tree } from '$lib/store/bstStore.svelte';
+	import { canvasStore } from '$lib/store/canvasStore.svelte';
 	import { Layer } from 'svelte-canvas';
 
 	interface Props {
@@ -12,21 +14,13 @@
 
 	let hovered = $state(false);
 
-	let render = $derived(
-		({
-			context,
-			width,
-			height
-		}: {
-			context: CanvasRenderingContext2D;
-			width: number;
-			height: number;
-		}) => {
-			width = PlaygroundConfig.NODE_SIZE * 2;
-			height = PlaygroundConfig.NODE_SIZE * 2;
-			context.fillStyle = hovered
-				? PlaygroundConfig.HOVER_NODE_BG_COLOR
-				: PlaygroundConfig.NODE_BG_COLOR;
+	let render =
+		() =>
+		({ context }: { context: CanvasRenderingContext2D }) => {
+			// context.fillStyle = hovered
+			// 	? PlaygroundConfig.HOVER_NODE_BG_COLOR
+			// 	: PlaygroundConfig.NODE_BG_COLOR;
+			context.fillStyle = PlaygroundConfig.NODE_BG_COLOR;
 			context.beginPath();
 			context.arc(x, y, PlaygroundConfig.NODE_SIZE, 0, 2 * Math.PI);
 			context.closePath();
@@ -37,19 +31,20 @@
 			context.textBaseline = 'middle';
 			context.fillStyle = PlaygroundConfig.NODE_TEXT_COLOR;
 			context.fillText(value!.toString(), x, y);
-		}
-	);
+		};
 
-	function onEnter(e: any) {
+	function onEnter() {
 		hovered = true;
+		document.querySelector('canvas')!.style.cursor = 'pointer';
 	}
 
-	function onLeave(e: any) {
+	function onLeave() {
 		hovered = false;
+		document.querySelector('canvas')!.style.cursor = 'unset';
 	}
 
 	function onClick() {
-		console.log('clicked');
+		tree.remove(value);
 	}
 </script>
 
