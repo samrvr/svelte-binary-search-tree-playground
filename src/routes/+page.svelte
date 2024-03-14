@@ -46,7 +46,7 @@
 	<meta name="description" content="Visualize binary search trees with ease." />
 </svelte:head>
 
-<div class="h-screen w-screen overflow-hidden relative bg-slate-900" bind:this={canvasContainer}>
+<div class="h-[100dvh] w-screen overflow-hidden relative bg-slate-900" bind:this={canvasContainer}>
 	<Canvas pixelRatio={1.5} bind:this={canvas} width={5000} height={3000} layerEvents>
 		<Grid />
 		<RootMarker />
