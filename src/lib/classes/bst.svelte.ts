@@ -37,24 +37,22 @@ export class BST {
 	}
 
 	getNodesAtDepthLeft(depth: number): BSTNode[] {
-		return this.root ? getNodesAtDepthLeft(this.root.left, depth) : [];
+		return this.root ? getNodesAtDepth(this.root.left, depth) : [];
 	}
 
 	getNodesAtDepthRight(depth: number): BSTNode[] {
-		return this.root ? getNodesAtDepthLeft(this.root.right, depth) : [];
+		return this.root ? getNodesAtDepth(this.root.right, depth) : [];
 	}
 }
 
-function getNodesAtDepthLeft(node: BSTNode | null, depth: number): BSTNode[] {
+function getNodesAtDepth(node: BSTNode | null, depth: number): BSTNode[] {
 	if (!node || depth < 0) {
 		return [];
 	}
 	if (depth === 0) {
 		return [node];
 	}
-	return getNodesAtDepthLeft(node.left, depth - 1).concat(
-		getNodesAtDepthLeft(node.right, depth - 1)
-	);
+	return getNodesAtDepth(node.left, depth - 1).concat(getNodesAtDepth(node.right, depth - 1));
 }
 
 function getDepth(node: BSTNode | null): number {
