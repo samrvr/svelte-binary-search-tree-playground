@@ -4,9 +4,10 @@
 	import NodeParent from '$lib/components/NodeParent.svelte';
 	import { tree } from '$lib/store/bstStore.svelte';
 	import { Canvas } from 'svelte-canvas';
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import Toolbar from '$lib/components/Toolbar.svelte';
 	import Header from '$lib/components/Header.svelte';
+	import { canvasStore } from '$lib/store/canvasStore.svelte';
 
 	let canvas: Canvas;
 	let canvasContainer: HTMLDivElement;
